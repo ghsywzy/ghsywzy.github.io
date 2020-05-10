@@ -318,41 +318,14 @@
 
       
         
-          
-            <h1 id="使用Hexo-github搭建自己的个人博客"><a href="#使用Hexo-github搭建自己的个人博客" class="headerlink" title="使用Hexo+github搭建自己的个人博客"></a>使用Hexo+github搭建自己的个人博客</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>hexo+github建立的个人博客是一个静态的个人博客，每次的更新操作都需要在本地进行，完成后再重新部署到github上</p>
-<h2 id="一、步骤目录"><a href="#一、步骤目录" class="headerlink" title="一、步骤目录"></a>一、步骤目录</h2><ol>
-<li>安装nodeJS(软件）</li>
-<li>注册github并新建仓库（网站）</li>
-<li>安装git（软件）</li>
-<li>githubSSH配置</li>
-<li>安装hexo并搭建本地网站</li>
-<li>把本地搭建了hexo网站部署到github上</li>
-</ol>
-<h2 id="二、详细步骤"><a href="#二、详细步骤" class="headerlink" title="二、详细步骤"></a>二、详细步骤</h2><h3 id="安装nodeJS-软件）"><a href="#安装nodeJS-软件）" class="headerlink" title="安装nodeJS(软件）"></a>安装nodeJS(软件）</h3><p><img src="https://img-blog.csdnimg.cn/2020051012221891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NzM3MTI0MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>介绍</strong>：加粗样式Hexo是基于nodeJS环境的静态博客，里面的npm工具很有用，所以还是把这玩意儿装了。<br><strong>官方下载地址</strong>：<a href="https://nodejs.org/en/" target="_blank" rel="noopener">点击这里进入</a><br>(说明：LTS为长期支持版，Current为当前最新版，建议下载LTS版)<br>安装步骤：一路next就好了。<br><strong>验证是否安装成功</strong>：快捷键Win+R,输入cmd回车，在命令面板中输入<code>node -v</code>,若显示了版本号则安装成功<br><img src="https://img-blog.csdnimg.cn/20200510122704440.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NzM3MTI0MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="注册github账号并新建仓库"><a href="#注册github账号并新建仓库" class="headerlink" title="注册github账号并新建仓库"></a>注册github账号并新建仓库</h2><p><strong>注册github账户</strong>：百度即可</p>
-<p><strong>新建仓库</strong>：登录github,在github上创建一个仓库repository，仓库名称要写成，否则后续无法进行</p>
-<blockquote>
-<p>XXXX.github.io</p>
-</blockquote>
-<p>(XXXX)为你注册的github账户名称<br><img src="https://img-blog.csdnimg.cn/20200510123515585.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NzM3MTI0MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200510124130396.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NzM3MTI0MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200510124154715.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NzM3MTI0MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>进入刚刚创建的仓库，点击setting<br><img src="https://img-blog.csdnimg.cn/20200510131332305.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NzM3MTI0MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>下拉找到GitHub Pages,圈内的网址就是以后别人访问你博客的网址了<br><img src="https://img-blog.csdnimg.cn/20200510131403229.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NzM3MTI0MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h2><p><strong>官方下载网址</strong>：<a href="https://gitforwindows.org/" target="_blank" rel="noopener">点击这里下载</a><br><strong>安装步骤</strong>：双击下载好的exe文件，一路next就好了<br><img src="https://img-blog.csdnimg.cn/20200510132334378.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NzM3MTI0MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="githubSSH配置"><a href="#githubSSH配置" class="headerlink" title="githubSSH配置"></a>githubSSH配置</h2><p>首先选定一个文件夹作为你博客的<strong>本地仓库</strong><br>然后进入该文件夹，右键选择git bash here<br>然后输入<code>ssh-keygen -t rsa -C&quot;xxx@qq.com&quot;</code>回车<br>注意！！！””冒号中的内容要换成你注册github时填写的邮箱<br><img src="https://img-blog.csdnimg.cn/20200510133626572.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NzM3MTI0MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>此时会提醒你输入存放SSH密匙的位置，可直接回车，会默认放在C:\Users\用户名.ssh文件夹下，也可以输入你想存放的位置<br>回车后会提示设置两次密码，不设置密码的话直接回车两次即可，建议直接两次回车<br>看到以下画面即设置成功<br><img src="https://img-blog.csdnimg.cn/20200510134226363.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NzM3MTI0MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>打开github.com，点击右上角，选择settings<br><img src="https://img-blog.csdnimg.cn/20200510134440395.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NzM3MTI0MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>选择SSH and GPG keys，点击new SSH Keys<br><img src="https://img-blog.csdnimg.cn/20200510134645832.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NzM3MTI0MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>进入C:\Users\用户名.ssh文件夹下用记事本方式打开id_rsa.pub，并复制里面的内容填写到Key中，Title内可以随意填写，然后点击Add SSH key。到这里就设置好SSH了<br><img src="https://img-blog.csdnimg.cn/20200510134900628.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NzM3MTI0MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="安装hexo并搭建本地网站"><a href="#安装hexo并搭建本地网站" class="headerlink" title="安装hexo并搭建本地网站"></a>安装hexo并搭建本地网站</h2><p><strong>在本地仓库文件夹中右键打开git bash here</strong><br>输入<code>npm install hexo-cli -g</code>回车<br><img src="https://img-blog.csdnimg.cn/20200510135538826.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NzM3MTI0MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>接下来和上面一样，依次输入</p>
-<ol>
-<li><code>hexo init</code></li>
-<li><code>npm install</code></li>
-<li><code>hexo server</code>或者<code>hexo s</code></li>
-</ol>
-<p><img src="https://img-blog.csdnimg.cn/20200510140022507.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NzM3MTI0MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这时候你的本地网站就已经建好了，复制图片上的网址<code>http://localhost:4000</code>粘贴到浏览器就可以访问你的本地网站了</p>
-<h2 id="把本地搭建了hexo网站部署到github上"><a href="#把本地搭建了hexo网站部署到github上" class="headerlink" title="把本地搭建了hexo网站部署到github上"></a>把本地搭建了hexo网站部署到github上</h2><p>打开本地仓库，对<code>_config.yml</code>文件进行编辑<br>打开文件后找到deploy<br>像下图一样配置<br>划红线的位置填入你的github账户名</p>
-<p><img src="https://img-blog.csdnimg.cn/20200510140509982.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NzM3MTI0MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>设置完后保存，然后在本地仓库打开git，输入<code>npm install hexo-deployer-git --save</code>安装插件<br>最后就是把本地网站通过git部署到github上<br>依次在git上输入一下命令</p>
-<ol>
-<li><code>hexo g</code></li>
-<li><code>hexo d</code></li>
-</ol>
-<p>这时候你的本地网站就已经部署到你的github上了。通过任意浏览器输入网址<code>https://你的github账户名.github.io</code>就可以访问你的个人博客了</p>
-
-          
+          <h1 id="使用Hexo-github搭建自己的个人博客"><a href="#使用Hexo-github搭建自己的个人博客" class="headerlink" title="使用Hexo+github搭建自己的个人博客"></a>使用Hexo+github搭建自己的个人博客</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>hexo+github建立的个人博客是一个静态的个人博客，每次的更新操作都需要在本地进行，完成后再重新部署到github上</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/05/10/%E4%BD%BF%E7%94%A8Hexo+github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%99%E6%80%81%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
