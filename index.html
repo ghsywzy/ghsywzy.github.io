@@ -248,7 +248,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/10/%E4%BD%BF%E7%94%A8Hexo+github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%99%E6%80%81%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/11/JAVA%E5%8F%8D%E5%B0%84%E7%9F%A5%E8%AF%86%E7%82%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ghsywzy">
@@ -267,7 +267,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/05/10/%E4%BD%BF%E7%94%A8Hexo+github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%99%E6%80%81%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" itemprop="url">使用Hexo+github搭建自己的静态个人博客</a></h1>
+                <a class="post-title-link" href="/2020/05/11/JAVA%E5%8F%8D%E5%B0%84%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url">JAVA反射知识点</a></h1>
         
 
         <div class="post-meta">
@@ -279,8 +279,175 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-10T14:17:21+08:00">
-                2020-05-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-11T09:35:30+08:00">
+                2020-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="JAVA反射知识点"><a href="#JAVA反射知识点" class="headerlink" title="JAVA反射知识点"></a>JAVA反射知识点</h1><h2 id="一、获取Class对象的三种方法"><a href="#一、获取Class对象的三种方法" class="headerlink" title="一、获取Class对象的三种方法"></a>一、获取Class对象的三种方法</h2><ol>
+<li><code>Class cls = Class.forName(&quot;完整的包名&quot;);</code></li>
+<li><code>Class cls = 类名.class;</code></li>
+<li><code>Class cls = 对象名.getClass;</code></li>
+</ol>
+<h2 id="二、获取类中的成员变量"><a href="#二、获取类中的成员变量" class="headerlink" title="二、获取类中的成员变量"></a>二、获取类中的成员变量</h2><ol>
+<li><p><code>Field[] f= Class对象.getFields();</code>获取所有public修饰的成员变量</p>
+</li>
+<li><p><code>Field f= Class对象.getField(&quot;要获取的变量名&quot;);</code>获取指定public变量</p>
+</li>
+<li><p><code>Field[] f= Class对象.getDeclaredFields();</code>获取包括私有的所有成员变量</p>
+</li>
+<li><p><code>Field f= Class对象.getDeclaredField(&quot;String name&quot;);</code>获取指定变量包括私有变量</p>
+<p>对获取的成员变量赋值：</p>
+</li>
+</ol>
+<p> <strong>需要注意的是</strong>:针对方法3、4在获取了私有成员变量后，必须进行“忽略访问权限修饰符的安全检查”(暴力反射)，否则在后续使用该成员变量时会报错。<br> <strong>忽略访问权限修饰符的安全检查</strong>：<code>f.setAccessible(true);</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f.set(类对象名，<span class="string">"赋值的内容"</span>)</span><br><span class="line">   Object o = f.get(类对象名);</span><br><span class="line">   System.out.println(o);</span><br></pre></td></tr></table></figure>
+<h2 id="三、获取类中的构造方法"><a href="#三、获取类中的构造方法" class="headerlink" title="三、获取类中的构造方法"></a>三、获取类中的构造方法</h2><ol>
+<li><code>Constructor[] constructor = Class对象.getConstructors();</code>获取所有public修饰的构造方法</li>
+<li><code>Constructor constructor = Class对象.getConstructor(参数1类型.class,参数2类型.class);</code>获取指定public构造方法</li>
+<li><code>Constructor[] constructor = Class对象.getDeclaredConstructors();</code>获取包括私有的所有构造方法</li>
+<li><code>Constructor constructor = Class对象.getDeclaredConstructor(参数1类型.class,参数2类型.class);</code>获取指定构造方法包括私有构造方法</li>
+</ol>
+<p>使用获取的构造方法new一个对象：<br> <strong>需要注意的是</strong>:针对方法3、4在获取了私有构造方法后，必须进行“忽略访问权限修饰符的安全检查”(暴力反射)，否则在后续使用该构造方法时会报错。<br> <strong>忽略访问权限修饰符的安全检查</strong>：<code>constructor.setAccessible(true);</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Object o3 = constructor.newInstance(构造方法参数, 构造方法参数);新建对象</span><br><span class="line">System.out.println(o3);</span><br><span class="line"><span class="comment">//一般调用空参构造是这样子的</span></span><br><span class="line">Object o3 = Class对象.newInstance();</span><br></pre></td></tr></table></figure>
+<h2 id="四、获取类中的成员方法"><a href="#四、获取类中的成员方法" class="headerlink" title="四、获取类中的成员方法"></a>四、获取类中的成员方法</h2><ol>
+<li><p><code>Method[] me = Class对象.getMethods();</code>获取所有public修饰的成员方法</p>
+</li>
+<li><p><code>Method me = Class对象.getMethod(&quot;方法名称&quot;，参数类型.class);</code>获取指定public成员方法</p>
+</li>
+<li><p><code>Method[] me = Class对象.getDeclaredMethods();</code>获取包括私有的所有成员方法</p>
+</li>
+<li><p><code>Method me = Class对象.getDeclaredMethod(&quot;方法名称&quot;，参数类型.class);</code>获取指定成员方法包括私有成员方法</p>
+<p>使用获取的成员方法：</p>
+</li>
+</ol>
+<p> <strong>需要注意的是</strong>:针对方法3、4在获取了私有成员方法后，必须进行“忽略访问权限修饰符的安全检查”(暴力反射)，否则在后续使用该成员方法时会报错。<br> <strong>忽略访问权限修饰符的安全检查</strong>：<code>me.setAccessible(true);</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">me.invoke(调用方法的对象名，方法的参数);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+<div>
+  
+</div>
+
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/11/%E4%BD%BF%E7%94%A8Hexo+github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%99%E6%80%81%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ghsywzy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ghsywzy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/11/%E4%BD%BF%E7%94%A8Hexo+github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%99%E6%80%81%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" itemprop="url">使用Hexo+github搭建自己的静态个人博客</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-11T08:17:48+08:00">
+                2020-05-11
               </time>
             
 
@@ -321,266 +488,7 @@
           <h1 id="使用Hexo-github搭建自己的个人博客"><a href="#使用Hexo-github搭建自己的个人博客" class="headerlink" title="使用Hexo+github搭建自己的个人博客"></a>使用Hexo+github搭建自己的个人博客</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>hexo+github建立的个人博客是一个静态的个人博客，每次的更新操作都需要在本地进行，完成后再重新部署到github上</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/05/10/%E4%BD%BF%E7%94%A8Hexo+github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%99%E6%80%81%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-<div>
-  
-</div>
-
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/09/markdown%E7%BC%96%E8%BE%91%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ghsywzy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ghsywzy">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/09/markdown%E7%BC%96%E8%BE%91%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" itemprop="url">markdown编辑器的使用方法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-09T21:38:49+08:00">
-                2020-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>title:my first blog<br>@<a href="MakeDown编辑器的使用方法">TOC</a></p>
-<h1 id="MakeDown编辑器的使用方法"><a href="#MakeDown编辑器的使用方法" class="headerlink" title="MakeDown编辑器的使用方法"></a>MakeDown编辑器的使用方法</h1><p>你好！ 这是你第一次使用 <strong>Markdown编辑器</strong> 所展示的欢迎页。如果你想学习如何使用Markdown编辑器, 可以仔细阅读这篇文章，了解一下Markdown的基本语法知识。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/05/09/markdown%E7%BC%96%E8%BE%91%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-<div>
-  
-</div>
-
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/09/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ghsywzy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ghsywzy">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/09/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-09T20:31:52+08:00">
-                2020-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/05/09/hello-world/#more" rel="contents">
+            <a class="btn" href="/2020/05/11/%E4%BD%BF%E7%94%A8Hexo+github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%99%E6%80%81%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -669,7 +577,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
