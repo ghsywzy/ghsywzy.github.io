@@ -1,40 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>JAVA反射知识点</title>
-    <url>/JAVA%E5%8F%8D%E5%B0%84%E7%9F%A5%E8%AF%86%E7%82%B9.html</url>
-    <content><![CDATA[<h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>反射中的一些基本用法</p>
-<hr>
-<a id="more"></a>    
-
-<h2 id="一、获取Class对象的三种方法"><a href="#一、获取Class对象的三种方法" class="headerlink" title="一、获取Class对象的三种方法"></a>一、获取Class对象的三种方法</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class cls = Class.forName(<span class="string">"完整的包名"</span>);</span><br><span class="line">Class cls = 类名<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">Class cls = 对象名.getClass;</span><br></pre></td></tr></table></figure>
-
-<h2 id="二、获取类中的成员变量"><a href="#二、获取类中的成员变量" class="headerlink" title="二、获取类中的成员变量"></a>二、获取类中的成员变量</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Field[] f= Class对象.getFields();<span class="comment">//获取所有public修饰的成员变量</span></span><br><span class="line">Field f= Class对象.getField(<span class="string">"要获取的变量名"</span>);<span class="comment">//获取指定public变量</span></span><br><span class="line">Field[] f= Class对象.getDeclaredFields();<span class="comment">//获取包括私有的所有成员变量</span></span><br><span class="line">Field f= Class对象.getDeclaredField(<span class="string">"String name"</span>);<span class="comment">//获取指定变量包括私有变量</span></span><br></pre></td></tr></table></figure>
-
-<p> 对获取的成员变量赋值：<br> <strong>需要注意的是</strong>:针对方法3、4在获取了私有成员变量后，必须进行“忽略访问权限修饰符的安全检查”(暴力反射)，否则在后续使用该成员变量时会报错。<br> <strong>忽略访问权限修饰符的安全检查</strong>：<code>f.setAccessible(true);</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">f.set(类对象名，<span class="string">"赋值的内容"</span>)</span><br><span class="line">Object o = f.get(类对象名);</span><br><span class="line">System.out.println(o);</span><br></pre></td></tr></table></figure>
-<h2 id="三、获取类中的构造方法"><a href="#三、获取类中的构造方法" class="headerlink" title="三、获取类中的构造方法"></a>三、获取类中的构造方法</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Constructor[] constructor = Class对象.getConstructors();<span class="comment">//获取所有public修饰的构造方法</span></span><br><span class="line">Constructor constructor = Class对象.getConstructor(参数<span class="number">1</span>类型<span class="class">.<span class="keyword">class</span>,参数2类型.<span class="title">class</span>)</span>;<span class="comment">//获取指定public构造方法</span></span><br><span class="line">Constructor[] constructor = Class对象.getDeclaredConstructors();<span class="comment">//获取包括私有的所有构造方法</span></span><br><span class="line">Constructor constructor = Class对象.getDeclaredConstructor(参数<span class="number">1</span>类型<span class="class">.<span class="keyword">class</span>,参数2类型.<span class="title">class</span>)</span>;<span class="comment">//获取指定构造方法包括私有构造方法</span></span><br></pre></td></tr></table></figure>
-
-<p>使用获取的构造方法new一个对象：<br> <strong>需要注意的是</strong>:针对方法3、4在获取了私有构造方法后，必须进行“忽略访问权限修饰符的安全检查”(暴力反射)，否则在后续使用该构造方法时会报错。<br> <strong>忽略访问权限修饰符的安全检查</strong>：<code>constructor.setAccessible(true);</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Object o3 = constructor.newInstance(构造方法参数, 构造方法参数);新建对象</span><br><span class="line">System.out.println(o3);</span><br><span class="line"><span class="comment">//一般调用空参构造是这样子的</span></span><br><span class="line">Object o3 = Class对象.newInstance();</span><br></pre></td></tr></table></figure>
-<h2 id="四、获取类中的成员方法"><a href="#四、获取类中的成员方法" class="headerlink" title="四、获取类中的成员方法"></a>四、获取类中的成员方法</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Method[] me = Class对象.getMethods();<span class="comment">//获取所有public修饰的成员方法</span></span><br><span class="line">Method me = Class对象.getMethod(<span class="string">"方法名称"</span>，参数类型<span class="class">.<span class="keyword">class</span>)</span>;<span class="comment">//获取指定public成员方法</span></span><br><span class="line">Method[] me = Class对象.getDeclaredMethods();<span class="comment">//获取包括私有的所有成员方法</span></span><br><span class="line">Method me = Class对象.getDeclaredMethod(<span class="string">"方法名称"</span>，参数类型<span class="class">.<span class="keyword">class</span>)</span>;<span class="comment">//获取指定成员方法包括私有成员方法</span></span><br></pre></td></tr></table></figure>
-
-<p> 使用获取的成员方法：</p>
-<p> <strong>需要注意的是</strong>:针对方法3、4在获取了私有成员方法后，必须进行“忽略访问权限修饰符的安全检查”(暴力反射)，否则在后续使用该成员方法时会报错。<br> <strong>忽略访问权限修饰符的安全检查</strong>：<code>me.setAccessible(true);</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">me.invoke(调用方法的对象名，方法的参数);</span><br></pre></td></tr></table></figure>
-
-
-
-
-]]></content>
-      <categories>
-        <category>JAVA基础</category>
-      </categories>
-      <tags>
-        <tag>JAVA反射</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Ubuntu忘记root密码和登录密码解决方法</title>
     <url>/Ubuntu%E5%BF%98%E8%AE%B0root%E5%AF%86%E7%A0%81%E5%92%8C%E7%99%BB%E5%BD%95%E5%AF%86%E7%A0%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95.html</url>
     <content><![CDATA[<h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>Ubuntu忘记登录密码进行重置时，需要用到ROOT密码，若此时ROOT密码也忘记了，那就尴尬了，不过没关系，ROOT密码也有办法重置滴。如果记得ROOT密码，可以直接跳到登录密码重置段落，否则还是乖乖从头看起吧。</p>
@@ -49,6 +15,32 @@
       </categories>
       <tags>
         <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决Oracle Linux中进入sqlplus命令行后无法使用删除键的问题</title>
+    <url>/%E8%A7%A3%E5%86%B3Oracle%20Linux%E4%B8%AD%E8%BF%9B%E5%85%A5sqlplus%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%90%8E%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E5%88%A0%E9%99%A4%E9%94%AE%E7%9A%84%E9%97%AE%E9%A2%98.html</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>安装完Oracle数据库后进入sqlplus时发现删除键无法使用，所以就通过网络搜索了一下解决办法，<br>现在自己总结了一下解决方法供大家参考。</p>
+<hr>
+<a id="more"></a>
+
+<ol>
+<li>进入oracle linux的根目录下即<code>cd /home/oracle</code></li>
+<li>用vim打开.bash_profile文件（这个是隐藏文件，用ls命令不会显示的）命令行输入<code>vi .bash_profile</code></li>
+<li>在最后面加上一行<code>stty erase ^H</code>然后<code>：wq</code>保存退出</li>
+<li>重新加载一下.bash_profile文件<code>source .bash_profile</code></li>
+<li>关闭会话窗重新打开就会发现删除键可以用了</li>
+</ol>
+<blockquote>
+<p>此方法只能修改删除键使其生效，对方向键无用，因为我只对删除键有需求，所以需要修改方向键的朋友请自行百度，嘿嘿</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200511211411644.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200511211445923.png" alt="在这里插入图片描述"><br>转载来自：<a href="https://blog.csdn.net/weixin_44336978/article/details/98039788?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase" target="_blank" rel="noopener">linux里sqlplus下删除退格，出现^H</a></p>
+]]></content>
+      <categories>
+        <category>Linux相关</category>
+      </categories>
+      <tags>
+        <tag>Oracle</tag>
       </tags>
   </entry>
   <entry>
@@ -97,29 +89,37 @@
       </tags>
   </entry>
   <entry>
-    <title>解决Oracle Linux中进入sqlplus命令行后无法使用删除键的问题</title>
-    <url>/%E8%A7%A3%E5%86%B3Oracle%20Linux%E4%B8%AD%E8%BF%9B%E5%85%A5sqlplus%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%90%8E%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E5%88%A0%E9%99%A4%E9%94%AE%E7%9A%84%E9%97%AE%E9%A2%98.html</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>安装完Oracle数据库后进入sqlplus时发现删除键无法使用，所以就通过网络搜索了一下解决办法，<br>现在自己总结了一下解决方法供大家参考。</p>
+    <title>JAVA反射知识点</title>
+    <url>/JAVA%E5%8F%8D%E5%B0%84%E7%9F%A5%E8%AF%86%E7%82%B9.html</url>
+    <content><![CDATA[<h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>反射中的一些基本用法</p>
 <hr>
-<a id="more"></a>
+<a id="more"></a>    
 
-<ol>
-<li>进入oracle linux的根目录下即<code>cd /home/oracle</code></li>
-<li>用vim打开.bash_profile文件（这个是隐藏文件，用ls命令不会显示的）命令行输入<code>vi .bash_profile</code></li>
-<li>在最后面加上一行<code>stty erase ^H</code>然后<code>：wq</code>保存退出</li>
-<li>重新加载一下.bash_profile文件<code>source .bash_profile</code></li>
-<li>关闭会话窗重新打开就会发现删除键可以用了</li>
-</ol>
-<blockquote>
-<p>此方法只能修改删除键使其生效，对方向键无用，因为我只对删除键有需求，所以需要修改方向键的朋友请自行百度，嘿嘿</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20200511211411644.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200511211445923.png" alt="在这里插入图片描述"><br>转载来自：<a href="https://blog.csdn.net/weixin_44336978/article/details/98039788?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase" target="_blank" rel="noopener">linux里sqlplus下删除退格，出现^H</a></p>
+<h2 id="一、获取Class对象的三种方法"><a href="#一、获取Class对象的三种方法" class="headerlink" title="一、获取Class对象的三种方法"></a>一、获取Class对象的三种方法</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class cls = Class.forName(<span class="string">"完整的包名"</span>);</span><br><span class="line">Class cls = 类名<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">Class cls = 对象名.getClass;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、获取类中的成员变量"><a href="#二、获取类中的成员变量" class="headerlink" title="二、获取类中的成员变量"></a>二、获取类中的成员变量</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Field[] f= Class对象.getFields();<span class="comment">//获取所有public修饰的成员变量</span></span><br><span class="line">Field f= Class对象.getField(<span class="string">"要获取的变量名"</span>);<span class="comment">//获取指定public变量</span></span><br><span class="line">Field[] f= Class对象.getDeclaredFields();<span class="comment">//获取包括私有的所有成员变量</span></span><br><span class="line">Field f= Class对象.getDeclaredField(<span class="string">"String name"</span>);<span class="comment">//获取指定变量包括私有变量</span></span><br></pre></td></tr></table></figure>
+
+<p> 对获取的成员变量赋值：<br> <strong>需要注意的是</strong>:针对方法3、4在获取了私有成员变量后，必须进行“忽略访问权限修饰符的安全检查”(暴力反射)，否则在后续使用该成员变量时会报错。<br> <strong>忽略访问权限修饰符的安全检查</strong>：<code>f.setAccessible(true);</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">f.set(类对象名，<span class="string">"赋值的内容"</span>)</span><br><span class="line">Object o = f.get(类对象名);</span><br><span class="line">System.out.println(o);</span><br></pre></td></tr></table></figure>
+<h2 id="三、获取类中的构造方法"><a href="#三、获取类中的构造方法" class="headerlink" title="三、获取类中的构造方法"></a>三、获取类中的构造方法</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Constructor[] constructor = Class对象.getConstructors();<span class="comment">//获取所有public修饰的构造方法</span></span><br><span class="line">Constructor constructor = Class对象.getConstructor(参数<span class="number">1</span>类型<span class="class">.<span class="keyword">class</span>,参数2类型.<span class="title">class</span>)</span>;<span class="comment">//获取指定public构造方法</span></span><br><span class="line">Constructor[] constructor = Class对象.getDeclaredConstructors();<span class="comment">//获取包括私有的所有构造方法</span></span><br><span class="line">Constructor constructor = Class对象.getDeclaredConstructor(参数<span class="number">1</span>类型<span class="class">.<span class="keyword">class</span>,参数2类型.<span class="title">class</span>)</span>;<span class="comment">//获取指定构造方法包括私有构造方法</span></span><br></pre></td></tr></table></figure>
+
+<p>使用获取的构造方法new一个对象：<br> <strong>需要注意的是</strong>:针对方法3、4在获取了私有构造方法后，必须进行“忽略访问权限修饰符的安全检查”(暴力反射)，否则在后续使用该构造方法时会报错。<br> <strong>忽略访问权限修饰符的安全检查</strong>：<code>constructor.setAccessible(true);</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Object o3 = constructor.newInstance(构造方法参数, 构造方法参数);新建对象</span><br><span class="line">System.out.println(o3);</span><br><span class="line"><span class="comment">//一般调用空参构造是这样子的</span></span><br><span class="line">Object o3 = Class对象.newInstance();</span><br></pre></td></tr></table></figure>
+<h2 id="四、获取类中的成员方法"><a href="#四、获取类中的成员方法" class="headerlink" title="四、获取类中的成员方法"></a>四、获取类中的成员方法</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Method[] me = Class对象.getMethods();<span class="comment">//获取所有public修饰的成员方法</span></span><br><span class="line">Method me = Class对象.getMethod(<span class="string">"方法名称"</span>，参数类型<span class="class">.<span class="keyword">class</span>)</span>;<span class="comment">//获取指定public成员方法</span></span><br><span class="line">Method[] me = Class对象.getDeclaredMethods();<span class="comment">//获取包括私有的所有成员方法</span></span><br><span class="line">Method me = Class对象.getDeclaredMethod(<span class="string">"方法名称"</span>，参数类型<span class="class">.<span class="keyword">class</span>)</span>;<span class="comment">//获取指定成员方法包括私有成员方法</span></span><br></pre></td></tr></table></figure>
+
+<p> 使用获取的成员方法：</p>
+<p> <strong>需要注意的是</strong>:针对方法3、4在获取了私有成员方法后，必须进行“忽略访问权限修饰符的安全检查”(暴力反射)，否则在后续使用该成员方法时会报错。<br> <strong>忽略访问权限修饰符的安全检查</strong>：<code>me.setAccessible(true);</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">me.invoke(调用方法的对象名，方法的参数);</span><br></pre></td></tr></table></figure>
+
+
+
+
 ]]></content>
       <categories>
-        <category>Linux相关</category>
+        <category>JAVA基础</category>
       </categories>
       <tags>
-        <tag>Oracle</tag>
+        <tag>JAVA反射</tag>
       </tags>
   </entry>
 </search>
